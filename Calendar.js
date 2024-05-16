@@ -1,337 +1,84 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Person from './Person'; // Importa o componente Inicio do arquivo Começo.js
+import React from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
-export default function Calendar({navigation}) {
+const consultations = [
+  { id: '1', doctor: 'Tania Quintella', specialty: 'Pneumologista', time: '10:00 AM' },
+  { id: '2', doctor: 'João Silva', specialty: 'Cardiologista', time: '11:00 AM' },
+  { id: '3', doctor: 'Maria Oliveira', specialty: 'Dermatologista', time: '12:00 PM' },
+  // Adicione mais consultas aqui
+];
+
+export default function Calendar({ navigation }) {
+  const renderItem = ({ item }) => (
+    <View style={styles.consultationCard}>
+      <Text style={styles.doctorName}>{item.doctor}</Text>
+      <Text style={styles.specialty}>{item.specialty}</Text>
+      <Text style={styles.time}>{item.time}</Text>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Agendar Consulta</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
-    <View>
-    
-     <Text style={styles.abc1}>Procurar...</Text>
-     <Text style={styles.abc2}>Todos</Text>
-      <Text style={styles.abc3}>Médicos</Text>
-         <Text style={styles.abc4}>Artigos</Text>
-      <Text style={styles.abc5}>Tania Quintella</Text>
-      <Text style={styles.abc6}>Pneumologista</Text>
-      <Text style={styles.abc7}>Agendar Consulta</Text>
-      <Text style={styles.abc8}>Tania Quintella</Text>
-      
-       <Text style={styles.abc9}>Pneumologista</Text>
-      <Text style={styles.abc10}>Agendar Consulta</Text>
-      <Text style={styles.abc11}>Tania Quintella</Text>
-      <Text style={styles.abc12}>Pneumologista</Text>
-      <Text style={styles.abc13}>Agendar Consulta</Text>
-      <Text style={styles.abc14}>Tania Quintella</Text>
-      <Text style={styles.abc15}>Pneumologista</Text>
-      <Text style={styles.abc16}>Agendar Consulta</Text>
-      <Text style={styles.abc17}>Tania Quintella</Text>
-      <Text style={styles.abc18}>Pneumologista</Text>
-      <Text style={styles.abc19}>Agendar Consulta</Text>
-      <Text style={styles.abc20}>Tania Quintella</Text>
-      <Text style={styles.abc21}>Pneumologista</Text>
-      <Text style={styles.abc22}>Agendar Consulta</Text>
-      <Text style={styles.abc1}>rodape</Text>
-  
-</View>
+    <View style={styles.container}>
+      <Text style={styles.header}>Consultas Agendadas</Text>
+      <FlatList
+        data={consultations}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        contentContainerStyle={styles.list}
+      />
+    </View>
   );
 };
 
-function navigation2 () { 
-  <NavigationContainer>
-          <Stack.Navigator initialRouteName={currentScreen}>
-            <Stack.Screen name="Person" component={Person} />
-          </Stack.Navigator>
-        </NavigationContainer>
-}
-
-
 const styles = StyleSheet.create({
-  abc1: {
-  marginTop: '20px',
-  marginBottom: '40px',
-  marginLeft: '50px',
-  width:900,
- borderRadius: '1500px',
+  container: {
     flex: 1,
     backgroundColor: '#f0f0f5',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"26px"
-    
-    
+    padding: 20,
   },
-
-  
-  abc2: {
-  marginTop: '-1px',
-  borderRadius: '20px',
-  marginLeft: '50px',
-  border: '1px solid black',
-    width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-    
+  header: {
+    fontSize: 26,
+    marginBottom: 20,
+    textAlign: 'center',
   },
-
-  abc3: {
-    marginBottom:'10px',
-    marginTop: '-23px',
-    borderRadius: '20px',
-    marginLeft: '270px',
-    border: '1px solid black',
-    width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-    
+  list: {
+    paddingBottom: 20,
   },
-  
-  abc4: {
-    marginBottom:'10px',
-    width:200,
-     marginTop: '-24px',
-    borderRadius: '15px',
-    marginLeft: '500px',
-    border: '1px solid black',
-    width:100,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
+  consultationCard: {
+    backgroundColor: '#fff',
+    padding: 20,
+    marginBottom: 15,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
-  
-  abc5: {
-    marginBottom:'10px',
-    marginLeft: '50px',
-    width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"24px"
+  doctorName: {
+    fontSize: 24,
+    marginBottom: 5,
   },
-  
-  abc6: {
-    marginBottom:'10px',
-     marginLeft: '50px',
-     width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
+  specialty: {
+    fontSize: 20,
+    color: '#666',
+    marginBottom: 10,
   },
-  
-  abc7: {
-    marginBottom:'10px',
-    color: '#ffffff',
-    borderRadius: '15px',
-     marginLeft: '50px',
-    border: '1px solid black',
-    width:1000,
-    width:200,
-    flex: 1,
+  time: {
+    fontSize: 18,
+    marginBottom: 15,
+  },
+  button: {
     backgroundColor: '#008000',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
   },
-  
-  abc8: {
-    marginBottom:'5px',
-    width:200,
-    marginLeft: '50px',
-    width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"24px"
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
   },
-  
-  abc9: {
-     marginBottom:'5px',
-    width:200,
-    marginLeft: '50px',
-    width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-  },
-  
-  abc10: {
-     marginBottom:'5px',
-    color: '#ffffff',
-    borderRadius: '15px',
-    marginLeft: '50px',
-    border: '1px solid black',
-    width:200,
-    flex: 1,
-    backgroundColor: '#008000',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"24px"
-  },
-  
-  abc11: {
-      marginBottom:'5px',
-     marginLeft: '50px',
-     width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-  },
-  
-  abc12: {
-      marginBottom:'5px',
-     marginLeft: '50px',
-     width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-  },
-  
-  abc13: {
-     marginBottom:'5px',
-    color: '#ffffff',
-    borderRadius: '15px',
-    marginLeft: '50px',
-    border: '1px solid black',
-    width:200,
-    flex: 1,
-    backgroundColor: '#008000',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"24px"
-  },
-  
-  abc14: {
-     marginBottom:'5px',
-    marginLeft: '50px',
-    width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"24px"
-  },
-  
-  abc15: {
-     marginBottom:'5px',
-    marginLeft: '50px',
-    width:200,
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-  },
-  
-  abc16: {
-     marginBottom:'5px',
-    color: '#ffffff',
-    borderRadius: '15px',
-    marginLeft: '50px',
-    border: '1px solid black',
-    width:200,
-    flex: 1,
-    backgroundColor: '#008000',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-  },
-  
-  abc17: {
-     marginBottom:'5px',
-    width:200,
-    marginLeft: '50px',
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"24px"
-  },
-  
-  abc18: {
-     marginBottom:'5px',
-    width:200,
-    marginLeft: '50px',
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-  },
-  
-  abc19: {
-     marginBottom:'5px',
-    color: '#ffffff',
-    borderRadius: '15px',
-    marginLeft: '50px',
-    width:200,
-    border: '1px solid black',
-    flex: 1,
-    backgroundColor: '#008000',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-  },
-  
-  abc20: {
-     marginBottom:'5px',
-    width:200,
-    marginLeft: '50px',
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-     fontSize:"24px"
-  },
-  
-  
-  
-  abc21: {
-     marginBottom:'5px',
-    width:200,
-    marginLeft: '50px',
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px",
-  },
-  
-    
-  abc22: {
-      marginBottom:'5px',
-     color: '#ffffff',
-     borderRadius: '15px',
-    marginLeft: '50px',
-    border: '1px solid black',
-    width:200,
-    flex: 1,
-    backgroundColor: '#008000',
-    alignItems: 'left',
-    justifyContent: 'top',
-    fontSize:"20px"
-  },
-  
-
-
-  
 });
-
-
- {
-}

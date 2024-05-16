@@ -1,35 +1,81 @@
-import * as React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
 
 function Person() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.textSubtitle}>Nome</Text>
-      <Text style={styles.text}>Ana Camargo Drumond</Text>
-      <Text style={styles.textSubtitle}>CPF</Text>
-      <Text style={styles.text}>737.835.678-66</Text>
-      <Text style={styles.textSubtitle}>Email</Text>
-      <Text style={styles.text}>anacamargo@gmail.com</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Image
+          source={require('./assets/Foto de perfil da pessoa.png')}
+          style={styles.profileImage}
+        />
+        <Text style={styles.name}>Ana Camargo Drumond</Text>
+      </View>
+
+      <View style={styles.infoContainer}>
+        <Text style={styles.textSubtitle}>CPF</Text>
+        <Text style={styles.text}>737.835.678-66</Text>
+        <Text style={styles.textSubtitle}>Email</Text>
+        <Text style={styles.text}>anacamargo@gmail.com</Text>
+      </View>
+
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Editar Perfil</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.button, styles.logoutButton]}>
+        <Text style={styles.buttonText}>Sair</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'left',
-    justifyContent: 'left',
-    margin: 25,
+    backgroundColor: '#f0f0f5',
+    padding: 20,
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 15,
+  },
+  name: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  infoContainer: {
+    marginBottom: 30,
+  },
+  textSubtitle: {
+    marginBottom: 5,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   text: {
     fontSize: 16,
-    marginBottom: 10,
+    marginBottom: 15,
   },
-  textSubtitle: {
-    marginBottom: 10,
-    fontSize: 20,
+  button: {
+    backgroundColor: '#4CAF50',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  logoutButton: {
+    backgroundColor: '#d9534f',
   },
 });
 

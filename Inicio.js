@@ -1,11 +1,11 @@
-import { StatusBar, Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import Calendar from './Calendar'; // Importa o componente Inicio do arquivo Começo.js
+import React from 'react';
+import { StatusBar, Image, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import Calendar from './Calendar';
 import Person from './Person';
 
 export default function Data({navigation})  {
   return ( 
-
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Image
           source={require('./assets/Foto de perfil da pessoa.png')}
@@ -13,7 +13,6 @@ export default function Data({navigation})  {
         />
         <Text style={styles.headerText}>Olá, Ana</Text>
       </View>
-
 
       <View style={styles.rectangle}>
         <Text style={styles.nextConsultationText}>Próxima consulta</Text>
@@ -32,184 +31,159 @@ export default function Data({navigation})  {
         <Text style={styles.explorer}>Explorar Serviços</Text>
       </View>
 
-      <View style={styles.imagens}>
-        <TouchableOpacity style={styles.touch}>
+      <View style={styles.servicesContainer}>
+        <TouchableOpacity style={styles.serviceItem}>
           <Image
             source={require('./assets/Consultas.png')}
             style={styles.serviceImage}
           />
+          <Text style={styles.serviceText}>Consultas</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.touch}>
+        <TouchableOpacity style={styles.serviceItem}>
           <Image
             source={require('./assets/Emergencia.png')}
             style={styles.serviceImage}
           />
+          <Text style={styles.serviceText}>Emergência</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.touch}>
+        <TouchableOpacity style={styles.serviceItem}>
           <Image
             source={require('./assets/Medicamentos.png')}
             style={styles.serviceImage}
           />
+          <Text style={styles.serviceText}>Medicamentos</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.menu}>
-        <TouchableOpacity style={styles.iconsMenu}>
+        <TouchableOpacity style={styles.iconsMenu} onPress={() => navigation.navigate('Home')}>
           <Image
             source={require('./assets/home.png')}
-            style={styles.guiaImage}
+            style={styles.menuImage}
           />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.iconsMenu} onPress={() => navigation.navigate('Calendar')}>
-       <Image
-       source={require('./assets/calendar_month.png')}
-       style={styles.guiaImage}
-        />
-      </TouchableOpacity>
+          <Image
+            source={require('./assets/calendar_month.png')}
+            style={styles.menuImage}
+          />
+        </TouchableOpacity>
 
-      
-
-        <TouchableOpacity style={styles.iconsMenu}>
+        <TouchableOpacity style={styles.iconsMenu} onPress={() => navigation.navigate('Chat')}>
           <Image
             source={require('./assets/chat.png')}
-            style={styles.guiaImage}
+            style={styles.menuImage}
           />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.iconsMenu} onPress={() => navigation.navigate('Person')}>        
           <Image
             source={require('./assets/person.png')}
-            
-            style={styles.guiaImage}
+            style={styles.menuImage}
           />
         </TouchableOpacity>
-
       </View>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
-
-
-function navigation (){
-    return (
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName={currentScreen}>
-            <Stack.Screen name="Data" component={Calendar} />
-            <Stack.Screen name="Person" component={Person} />
-          </Stack.Navigator>
-        </NavigationContainer>
-        );}
-
-
-
-
-// O InicioCalendario não precisa mais estar aqui
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f0f0f5',
   },
-
   header: {
-    flexDirection: 'row', // Para alinhar a imagem e o texto lado a lado
-    paddingHorizontal: 20, // Adiciona espaçamento horizontal
-    paddingVertical: 18, // Adiciona espaçamento vertical
-    borderBottomWidth: 1, // Adiciona uma borda na parte inferior
-    borderBottomColor: '#ccc', // Cor da borda
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingVertical: 18,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
-
   profileImage: {
     width: 60,
-    height: 50,
-    borderRadius: 30, // Para tornar a imagem circular
-    marginRight: 10, // Adiciona margem à direita da imagem
+    height: 60,
+    borderRadius: 30,
+    marginRight: 10,
   },
-
   headerText: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
   },
-
   rectangle: {
-    backgroundColor: 'green', // Cor do retângulo
-    padding: 20, // Adiciona espaçamento interno
-    marginTop: 20, // Adiciona margem superior
+    backgroundColor: '#4CAF50',
+    padding: 20,
+    margin: 20,
+    borderRadius: 10,
   },
-
   nextConsultationText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white', // Cor do texto
+    color: 'white',
+    marginBottom: 5,
   },
-
   dateText: {
     fontSize: 16,
-    color: 'white', // Cor do texto
+    color: 'white',
+    marginBottom: 5,
   },
-
   timeText: {
     fontSize: 16,
-    color: 'white', // Cor do texto
+    color: 'white',
   },
-
   imageContainer: {
-    alignItems: 'center', // Centraliza a imagem na View
-    marginTop: 20, // Adiciona margem superior
+    alignItems: 'center',
+    marginTop: 20,
   },
-
   carecaImage: {
-    resizeMode: 'cover',
+    width: '80%',
+    height: 200,
+    resizeMode: 'contain',
   },
-
   explorar: {
     alignItems: 'center',
     marginTop: 30,
   },
-
   explorer: {
     fontSize: 25,
     fontWeight: 'bold',
   },
-
-  imagens: {
-    flex: 1,
+  servicesContainer: {
     flexDirection: 'row',
-    width: '100%',
     justifyContent: 'space-around',
     padding: 10,
+  },
+  serviceItem: {
     alignItems: 'center',
   },
-
-  touch: {
-    width: 100,
-    height: 100,
-  },
-
   serviceImage: {
-    resizeMode: 'cover',
-    width: '100%',
-    height: '100%'
+    width: 80,
+    height: 80,
+    marginBottom: 5,
   },
-
-  guiaImage: {
-    resizeMode: 'cover',
+  serviceText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  menu: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 15,
+    backgroundColor: '#ffffff',
+    borderTopWidth: 1,
+    borderTopColor: '#ccc',
+  },
+  iconsMenu: {
+    alignItems: 'center',
+  },
+  menuImage: {
     width: 30,
     height: 30,
   },
-
-  menu: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  iconsMenu:{
-    margin: 20,
-  }
 });
